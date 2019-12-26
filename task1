@@ -1,0 +1,23 @@
+drop table task;
+create table employees
+(
+emp_id number,
+emp_name varchar2(50)
+constraint emp_id_pk primary key(emp_id)
+);
+create table task2
+(
+task_id number,
+task_name varchar2(50) not null,
+emp_id number,
+emp_name varchar2(50)
+deadline_date date not null,
+completed_date date,
+status varchar2(20),
+create_date date not null,
+last_modified_date date not null,
+constraint emp_name_uq unique (emp_name),
+constraint emp_id_fk foreign key (emp_id) references employees(emp_id)
+);
+select * from task2
+alter table task2 add priority varchar2(10)(constraint priority_ck check (priority in('low','medium','high'))
