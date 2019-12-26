@@ -16,8 +16,9 @@ completed_date date,
 status varchar2(20),
 create_date date not null,
 last_modified_date date not null,
+constraint status_ch check(status in('assigned','processing','completed'),
 constraint emp_name_uq unique (emp_name),
 constraint emp_id_fk foreign key (emp_id) references employees(emp_id)
 );
 select * from task2
-alter table task2 add priority varchar2(10)(constraint priority_ck check (priority in('low','medium','high'))
+alter table task2 add priority varchar2(10)(constraint priority_ck check (priority in('low','medium','high'));
