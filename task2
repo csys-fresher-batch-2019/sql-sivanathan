@@ -1,0 +1,78 @@
+drop table book;
+drop table orders;
+
+
+create table book
+(
+book_id number ,
+book_name varchar2(70) not null,
+author_name varchar2(70),
+prize number not null,
+categories varchar2(70) not null,
+active number,
+version number,
+constraint book_id_pk primary key(book_id),
+constraint book_uk unique(book_name,author_name,version),
+constraint active_ck check(active in(0,1)),
+constraint prize_ck check(prize>=0)
+);
+
+
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version)
+values(1,'Harry Potter The philospher stone','J.K.R',400,'Fanatcy',1,1);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version)
+values(2,'Harry Potter The Chamber of Secrets','J.K.R',500,'Fanatcy',1,1);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version)
+values(3,'Harry Potter The Deadly Hollows','J.K.R',450,'Fanatcy',1,1);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version)
+values(4,'Two States','Karan Sharma',400,'Romance',1,2);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version) values(5,'Electrical Machines','J.P.GUPTA',1000,'technical',1,1);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version) values(6,'Power System','John J.gringer',550,'technical',1,1);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version) values(7,'Power Electronics','Ned Mohan',800,'technical',0,3);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version) values(8,'Think fast and slow','games',340,'psychological',0,3);
+
+insert into book(book_id,book_name,author_name,prize,categories,active,version) values(9,'Power system protection','badri nath',770,'technical',1,2); 
+
+select* from book;
+
+create table orders
+(
+order_id number not null,
+username varchar2(20),
+ordered_date  TIMESTAMP,
+delivery_date TIMESTAMP,
+status number,
+total_amount number not null,
+quantity number not null,
+book_id number not null,
+comments varchar2(100),
+constraint order_uk unique(username,total_amount,quantity),
+constraint amount_ck check(total_amount>0),
+constraint quantity_ck check(quantity>0),
+constraint status_ck check(status in(0,1)),
+constraint book_fk foreign key (book_id) references book (book_id)
+
+);
+
+insert into orders(order_id,username,book_id,ordered_date,total_amount,quantity,status)
+values(1,'Karthik',3,SYSTIMESTAMP,500,1,1);
+
+insert into orders(order_id,username,book_id,ordered_date,total_amount,quantity,status)
+values(2,'anand',2,SYSTIMESTAMP,800,3,0);
+
+insert into orders(order_id,username,book_id,ordered_date,total_amount,quantity,status)
+values(3,'arjun',6,SYSTIMESTAMP,900,1,1);
+
+insert into orders(order_id,username,book_id,ordered_date,total_amount,quantity,status)
+values(4,'siva',4,SYSTIMESTAMP,1500,2,0);
+
+select* from orders;
+
