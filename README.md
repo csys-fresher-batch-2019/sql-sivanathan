@@ -7,7 +7,8 @@ http://lakport.nic.in/Home.aspx
 ###feature1;
 *source place to destination place
 
-query:
+
+
 create table home
 (
 source_place varchar2(50)not null,
