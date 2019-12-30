@@ -19,7 +19,7 @@ destination_place varchar2(50)not null,
 ship_id number not null,
 constraint ship_id primary key(ship_id),
 constraint source_place_ck check(source_place in('amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea'),
-constraint destination_place_ck check(destination_place in('amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea'),
+constraint destination_place_ck check(destination_place in('amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea')
 );
 
 
