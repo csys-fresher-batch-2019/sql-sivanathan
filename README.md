@@ -1,10 +1,13 @@
-# SHIP TICKET BOOKING
+# SHIP TICKET BOOKING:
+
 http://lakport.nic.in/Home.aspx
 
-## feature;
+## feature:
+
 *ship ticket booking layout page
 
-### feature1;
+### feature1:
+
 *source place to destination place
 
 
@@ -13,9 +16,10 @@ create table home
 (
 source_place varchar2(50)not null,
 destination_place varchar2(50)not null,
-security_code varchar2(10)not null,
+ship_id number,
+constraint ship_id primary key(ship_id),
 constraint source_place_ck check(source_place in('amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea'),
 constraint destination_place_ck check(destination_place in('amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea'),
-constraint security_code_uk unique(security_code)
 );
+
 
