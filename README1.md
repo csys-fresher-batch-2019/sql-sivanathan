@@ -13,6 +13,8 @@
 |----------|---------|----------|
 | 1        | 101     | 100      |
 | 2        | 102     | 50       |
+
+
 ##table:orders
 
 | order_id | username | book_id | quantity | status    |
