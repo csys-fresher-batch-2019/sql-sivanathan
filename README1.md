@@ -1,13 +1,13 @@
-#book app
+# book app
 
-##table:books
+## table:books
 
 | book_id | book_name |
 |:-------:|:---------:|
 |   101   |     c     |
 |   102   |    java   |
 
-##table:book_stock
+## table:book_stock
 
 | stock_id | book_id | quantity |
 |----------|---------|----------|
@@ -15,7 +15,7 @@
 | 2        | 102     | 50       |
 
 
-##table:orders
+## table:orders
 
 | order_id | username | book_id | quantity | status    |
 |----------|----------|---------|----------|-----------|
