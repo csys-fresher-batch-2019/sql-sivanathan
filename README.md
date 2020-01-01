@@ -12,7 +12,6 @@ http://lakport.nic.in/Home.aspx
 
 
 ~~~sql
-
 drop table home;
 drop table ship_schedule;
 drop table fare_table;
@@ -39,11 +38,10 @@ constraint destination_place_cp check(destination_place in('amindivi','lagoons',
 insert into home values('minicoy','lagoons',1324,16159,'null','no','9876543210','null');
 insert into home values('amindivi','lagoons',1524,13259,'null','yes','9875643210','null');
 insert into home values('corals','arabiansea',1894,23456,'null','no','8776543210','null');
-insert into home values('arabiansea','lakshadeepsea',1524,13259,'null','yes','9866543210','null');
+
 select*from home;
 
 ### feature2:
-
 *layout of ship schedule
 
 ~~~sql
@@ -59,20 +57,19 @@ constraint ship_detail_ck check(ship_detail in('all_passengers','all_hs_vessels'
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_passengers',to_date('01.01.2020','dd.MM.yyyy'),to_date('05.01.2020','dd.MM.yyyy'));
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_hs_vessels',to_date('06.01.2020','dd.MM.yyyy'),to_date('10.01.2020','dd.MM.yyyy'));
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_cargo_ship',to_date('08.01.2020','dd.MM.yyyy'),to_date('12.01.2020','dd.MM.yyyy'));
-insert into ship_schedule(ship_detail,arr_date,destination_date) values('kaavaratti',to_date('09.01.2020','dd.MM.yyyy'),to_date('15.01.2020','dd.MM.yyyy'));
-select*from ship_schedule;
+
+
 
 --desc ship_schedule;
 
-### feature3:
-
+### feature3;
 *fare table
 
 ~~~sql
 
 create table fare_table(
-fare_table varchar2(20) not null,
-constraint fare_table_ck check(fare_table in('hsc bangram','hsc blarck margin','all hs vessels','all cargo ship','amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea')),
+ship_detail varchar2(20) not null,
+constraint ship_detail_co check(ship_detail in('all_passengers','all_hs_vessels','all_cargo_ship','amindivi','lagoons','kaavaratti','minicoy','corals','arabiansea','lakshadeepsea')),
 classes varchar2(20) not null,
 constraint class_ck check(classes in('ladies','first class','second class','bunk','owners','vip')),
 price number,
@@ -82,13 +79,12 @@ constraint name_cz check(freight_name in('AC CONDITIONERS','BABYCYCLE','COMPUTER
 constraint fare_cz check(fare in(1000,100,50,2000))
 
 );
-insert into fare_table values('hsc bangram','first class',10000,'AC CONDITIONERS',1000);
-insert into fare_table values('hsc blarck margin','second class',5000,'BABYCYCLE',100);
-insert into fare_table values('all hs vessels','owners',7000,'COMPUTER_TABLE',50);
-select*from fare_table;
+insert into fare_table values('all_passengers','first class',7000,'AC CONDITIONERS',1000);
+insert into fare_table values('all_hs_vessels','owners',10000,'COMPUTER_TABLE',50);
+insert into fare_table values('all_cargo_ship','second class',5000,'BABYCYCLE',100);
 
+select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freight_name,fa.fare from ship_schedule s inner join fare_table fa on s.ship_detail = fa.ship_detail;
 ### feature4:
-
 *seat availability
 
 ~~~sql
