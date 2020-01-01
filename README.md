@@ -50,6 +50,7 @@ insert into home values('corals','arabiansea',1894,23456,'null','no','8776543210
 select*from home;
 
 ### feature2:
+
 *layout of ship schedule
 
 ~~~sql
@@ -92,8 +93,25 @@ insert into fare_table values('all_hs_vessels','owners',10000,'COMPUTER_TABLE',5
 insert into fare_table values('all_cargo_ship','second class',5000,'BABYCYCLE',100);
 
 select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freight_name,fa.fare from ship_schedule s inner join fare_table fa on s.ship_detail = fa.ship_detail;
+### table:
+
+| ship_detail    | arr_date  | destination_date | class        | price | freight_name    | fare |
+|----------------|-----------|------------------|--------------|-------|-----------------|------|
+| all_passengers | 01-jan-20 | 05-jan-20        | first class  | 7000  | AC CONDITIONERS | 1000 |
+| all_hs_vessels | 06-jan-20 | 10-jan-20        | owners       | 10000 | COMPUTER_TABLE  | 50   |
+| all_cargo_ship | 08-jan-20 | 12-jan-20        | second class | 5000  | BABYCYCLE       | 100  |
+
+
 ### feature4:
 *seat availability
+
+### table:
+
+| seat_pp | categories | route_view | source_place | destination_place | ticket_number | available_status |
+|---------|------------|------------|--------------|-------------------|---------------|------------------|
+| yes     | all        | yes        | minicoy      | lagoons           | 12345         | available        |
+| no      | direct     | no         | amindivi     | lagoons           | 14545         | waiting_list     |
+| yes     | indirect   | yes        | corals       | arabiansea        | 12225         | available        |
 
 ~~~sql
 
@@ -119,3 +137,5 @@ insert into seat_availability values('yes','all','yes','minicoy','lagoons',12345
 insert into seat_availability values('no','direct','no','kaavaratti','minicoy',14545,'waiting_list');
 insert into seat_availability values('yes','indirect','yes','corals','arabiansea',12225,'available');
 select*from seat_availability;
+
+
