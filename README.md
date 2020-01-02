@@ -54,7 +54,7 @@ select*from home;
 
 *layout of ship schedule
 
-QUERY:
+~~~sql:
 
 create table ship_schedule
 (
@@ -68,12 +68,12 @@ insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_pas
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_hs_vessels',to_date('06.01.2020','dd.MM.yyyy'),to_date('10.01.2020','dd.MM.yyyy'));
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_cargo_ship',to_date('08.01.2020','dd.MM.yyyy'),to_date('12.01.2020','dd.MM.yyyy'));
 --desc ship_schedule;
-
+~~~~
 
 ### feature3;
 *fare table
 
-sql
+~~~sql
 
 create table fare_table(
 ship_detail varchar2(20) not null,
@@ -92,7 +92,7 @@ insert into fare_table values('all_hs_vessels','owners',10000,'COMPUTER_TABLE',5
 insert into fare_table values('all_cargo_ship','second class',5000,'BABYCYCLE',100);
 
 select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freight_name,fa.fare from ship_schedule s inner join fare_table fa on s.ship_detail = fa.ship_detail;
-
+~~~~
 
 ### table:
 
@@ -114,7 +114,7 @@ select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freigh
 | no      | direct     | no         | amindivi     | lagoons           | 14545         | waiting_list     |
 | yes     | indirect   | yes        | corals       | arabiansea        | 12225         | available        |
 
-sql
+~~~sql
 
 create table seat_availability
 (
