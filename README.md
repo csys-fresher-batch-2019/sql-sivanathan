@@ -35,6 +35,7 @@ terms_and_conditions varchar2(200),
 refund_or_cancellation varchar2(20),
 contact_number varchar(11) not null,
 about_us varchar2(200),
+constraint source_place_uu check(source_place in(source_place<>destination_place)),
 constraint contact_number_cs check(contact_number between 1111111111 and 9999999999 ),
 constraint refund_or_cancellation_cs check(refund_or_cancellation in('yes','no')),
 
@@ -45,7 +46,7 @@ constraint destination_place_cp check(destination_place in('amindivi','lagoons',
 insert into home values('minicoy','lagoons',1324,16159,'null','no','9876543210','null');
 insert into home values('amindivi','lagoons',1524,13259,'null','yes','9875643210','null');
 insert into home values('corals','arabiansea',1894,23456,'null','no','8776543210','null');
-select*from home;
+select*from home where(source_place<>destination_place);
 `````
 
 
