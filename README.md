@@ -11,12 +11,11 @@ http://lakport.nic.in/Home.aspx
 *source place to destination place
 
 ### table:
-
 | source_place | destination_place | ship_id | enroll_id | terms_and_condition | refund_or_cancellation | contact_number | about_us |
-|:------------:|:-----------------:|:-------:|:---------:|:-------------------:|:----------------------:|:--------------:|:--------:|
+|--------------|-------------------|---------|-----------|---------------------|------------------------|----------------|----------|
 | minicoy      | lagoons           | 1324    | 16159     | null                | no                     | 9876543210     | null     |
 | amindivi     | lagooons          | 1524    | 13259     | null                | yes                    | 9875643210     | null     |
-| corals       | arabiansea        | 1894    | 23456     | null                | no                     | 877653210      |
+| corals       | arabiansea        | 1894    | 23456     | null                | no                     | 8776532100     | null     |
 
 
 ``` sql
