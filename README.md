@@ -19,7 +19,7 @@ http://lakport.nic.in/Home.aspx
 | corals       | arabiansea        | 1894    | 23456     | null                | no                     | 877653210      |
 
 
-~~~sql
+``` sql
 drop table home;
 drop table ship_schedule;
 drop table fare_table;
@@ -46,14 +46,15 @@ constraint destination_place_cp check(destination_place in('amindivi','lagoons',
 insert into home values('minicoy','lagoons',1324,16159,'null','no','9876543210','null');
 insert into home values('amindivi','lagoons',1524,13259,'null','yes','9875643210','null');
 insert into home values('corals','arabiansea',1894,23456,'null','no','8776543210','null');
-
 select*from home;
+`````
+
 
 ### feature2:
 
 *layout of ship schedule
 
-~~~sql
+QUERY:
 
 create table ship_schedule
 (
@@ -66,15 +67,13 @@ constraint ship_detail_ck check(ship_detail in('all_passengers','all_hs_vessels'
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_passengers',to_date('01.01.2020','dd.MM.yyyy'),to_date('05.01.2020','dd.MM.yyyy'));
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_hs_vessels',to_date('06.01.2020','dd.MM.yyyy'),to_date('10.01.2020','dd.MM.yyyy'));
 insert into ship_schedule(ship_detail,arr_date,destination_date) values('all_cargo_ship',to_date('08.01.2020','dd.MM.yyyy'),to_date('12.01.2020','dd.MM.yyyy'));
-
-
-
 --desc ship_schedule;
+
 
 ### feature3;
 *fare table
 
-~~~sql
+sql
 
 create table fare_table(
 ship_detail varchar2(20) not null,
@@ -93,6 +92,8 @@ insert into fare_table values('all_hs_vessels','owners',10000,'COMPUTER_TABLE',5
 insert into fare_table values('all_cargo_ship','second class',5000,'BABYCYCLE',100);
 
 select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freight_name,fa.fare from ship_schedule s inner join fare_table fa on s.ship_detail = fa.ship_detail;
+
+
 ### table:
 
 | ship_detail    | arr_date  | destination_date | class        | price | freight_name    | fare |
@@ -113,7 +114,7 @@ select s.ship_detail,s.arr_date,s.destination_date,fa.classes,fa.price,fa.freigh
 | no      | direct     | no         | amindivi     | lagoons           | 14545         | waiting_list     |
 | yes     | indirect   | yes        | corals       | arabiansea        | 12225         | available        |
 
-~~~sql
+sql
 
 create table seat_availability
 (
