@@ -12,6 +12,12 @@ http://lakport.nic.in/Home.aspx
 
 ### table:
 
+| user_name | user_id | date_of_birth | contact number | gender | pass |
+|-----------|---------|---------------|----------------|--------|------|
+| siva      | 12345   | 01-nov-98     | 9876543210     | M      | xyx  |
+| sumen     | 13345   | 10-dec-98     | 9876643210     | M      | aaa  |
+| bala      | 14545   | 21-jan-98     | 9870043210     | M      | lll  |
+
 
 ``` sql
 drop table user_s;
@@ -46,6 +52,14 @@ select*from user_s;
 
 *layout of ship schedule
 
+### table:
+
+| user_id | ship_id | ship_type      | source_place | destination_place | total_no_of_seats | classes      |
+|---------|---------|----------------|--------------|-------------------|-------------------|--------------|
+| 12345   | 767676  | all_passengers | amindivi     | lagoons           | 100               | first_class  |
+| 13345   | 764376  | all_hr_vessels | kaavaratti   | minicoy           | 50                | owners       |
+| 14545   | 987676  | all_cargo_ship | corals       | arabiansea        | 150               | second_class |
+
 ~~~sql:
 
 create table ship
@@ -78,6 +92,14 @@ select * from ship where(source_place<>destination_place);
 ### feature3;
 *journey
 
+### table:
+
+| journey_id | journey_date | ship_id | no_of_seats |
+|------------|--------------|---------|-------------|
+| 1611566    | 01-jan-20    | 767676  | 5           |
+| 1611876    | 02-jan-20    | 764376  | 3           |
+| 1611436    | 03-jan-20    | 987676  | 1           |
+
 ~~~sql
 create table journey
 (
@@ -104,6 +126,12 @@ select*from journey;
 *seat booking
 
 ### table:
+
+| booking_id | user_id | journey_id | booking_seats | ship_id | date_of_booking    | status       |
+|------------|---------|------------|---------------|---------|--------------------|--------------|
+| 11111      | 12345   | 1611566    | 5             | 767676  | 02-jan-20 06:40:36 | ordered      |
+| 11441      | 13345   | 1611876    | 3             | 764376  | 02-jan-20 06:40:36 | waiting_list |
+| 11131      | 14545   | 1611436    | 1             |         | 02-jan-20 06:40:36 | ordered      |
 
 ~~~sql
 
