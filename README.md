@@ -35,7 +35,7 @@ terms_and_conditions varchar2(200),
 refund_or_cancellation varchar2(20),
 contact_number varchar(11) not null,
 about_us varchar2(200),
-constraint source_place_uu check(source_place in(source_place<>destination_place)),
+--constraint source_place_uu check(source_place in(source_place<>destination_place)),
 constraint contact_number_cs check(contact_number between 1111111111 and 9999999999 ),
 constraint refund_or_cancellation_cs check(refund_or_cancellation in('yes','no')),
 
