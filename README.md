@@ -155,6 +155,11 @@ ship_id number,
 date_of_booking timestamp,
 status varchar(20) not null,
 cost number,
+freight_name varchar2(20) ,
+fare number,
+constraint name_ca check(freight_name in('AC CONDITIONERS','BABYCYCLE','COMPUTER_TABLE','CAR')),
+constraint fare_cb check(fare in(1000,100,50,2000)),
+
 constraint sship_id_fk foreign key(ship_id) references ship(ship_id),
 constraint user_id_fa foreign key(user_id) references user_s(user_id),
 constraint abc_ck check(booking_seats>0),
@@ -170,4 +175,35 @@ insert into booking
 values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
 
 select*from booking ;
+select TOTAL_SEAT(1611566) from dual ;
+CREATE OR REPLACE FUNCTION TOTAL_SEAT(i_journey_id IN NUMBER)
+RETURN NUMBER AS
+
+    v_remaining_seat NUMBER:=0;
+    v_seat NUMBER :=0;
+    v_ordered NUMBER:=0;
+BEGIN
+    select no_of_seats into v_seat from ship where(journey_id=i_journey_id);
+    select sum(no_of_seats)into v_ordered from ship where (journey_id=i_journey_id and status IN('ordered'));
+v_remaining_seat:=v_seat-v_ordered;
+
+RETURN v_remaining_seat;
+END TOTAL_SEAT;
+
+
+(
+CREATE OR REPLACE FUNCTION TOTAL_FARE(AB IN VARCHAR2)
+RETURN NUMBER AS
+v_original_fare NUMBER:=0;
+v_fare NUMBER :=0;
+v_ordered_fare NUMBER:=0;
+BEGIN
+  select price into v_fare from amount where(freight_name=AB);
+select sum(price)into v_ordered_fare from amount where(freight_name=AB and status IN('ordered'));
+v_original_fare:=v_fare+v_ordered_fare;
+
+RETURN v_original_fare;
+END TOTAL_FARE;
+)
+
 
