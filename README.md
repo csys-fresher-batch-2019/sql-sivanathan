@@ -39,9 +39,12 @@ constraint contact_number_cs check(contact_number between 1111111111 and 9999999
 constraint user_id_pk primary key(user_id),
 constraint user_name_uk unique(user_name,pass)
 );
-insert into user_s values('siva',12345,to_date('01-11-1998','dd-MM-yyyy'),9876543210,'M','xyx');
-insert into user_s values('sumen',13345,to_date('10-12-1998','dd-MM-yyyy'),9876643210,'M','aaa');
-insert into user_s values('bala',14545,to_date('21-01-1998','dd-MM-yyyy'),9870043210,'M','lll');
+insert into user_s 
+values('siva',12345,to_date('01-11-1998','dd-MM-yyyy'),9876543210,'M','xyx');
+insert into user_s 
+values('sumen',13345,to_date('10-12-1998','dd-MM-yyyy'),9876643210,'M','aaa');
+insert into user_s 
+values('bala',14545,to_date('21-01-1998','dd-MM-yyyy'),9870043210,'M','lll');
 select*from user_s;
 
 
@@ -82,9 +85,12 @@ constraint ship_id_un primary key(ship_id)
 
 
 
-insert into ship values(12345,767676,'all_passengers','amindivi','lagoons',5,'first class');
-insert into ship values(13345,764376,'all_hs_vessels','kaavaratti','minicoy',2,'owners');
-insert into ship values(14545,987676,'all_cargo_ship','corals','arabiansea',1,'second class');
+insert into ship 
+values(12345,767676,'all_passengers','amindivi','lagoons',5,'first class');
+insert into ship
+values(13345,764376,'all_hs_vessels','kaavaratti','minicoy',2,'owners');
+insert into ship 
+values(14545,987676,'all_cargo_ship','corals','arabiansea',1,'second class');
 select * from ship where(source_place<>destination_place);
 
 ~~~~
@@ -110,9 +116,12 @@ total_no_of_seats number not null,
 constraint journey_id_pk primary key(journey_id),
 constraint ship_id_fr foreign key(ship_id) references ship(ship_id)
 );
-insert into journey values(1611566,to_date('01-01-2020','dd-MM-yyyy'),767676,100);
-insert into journey values(1611876,to_date('02-01-2020','dd-MM-yyyy'),764376,100);
-insert into journey values(1611436,to_date('03-01-2020','dd-MM-yyyy'),987676,100);
+insert into journey
+values(1611566,to_date('01-01-2020','dd-MM-yyyy'),767676,100);
+insert into journey
+values(1611876,to_date('02-01-2020','dd-MM-yyyy'),764376,100);
+insert into journey
+values(1611436,to_date('03-01-2020','dd-MM-yyyy'),987676,100);
 select*from journey;
 
 
@@ -145,7 +154,7 @@ booking_seats number not null,
 ship_id number,
 date_of_booking timestamp,
 status varchar(20) not null,
-cost,
+cost number,
 constraint sship_id_fk foreign key(ship_id) references ship(ship_id),
 constraint user_id_fa foreign key(user_id) references user_s(user_id),
 constraint abc_ck check(booking_seats>0),
@@ -153,9 +162,12 @@ constraint journey_id_fz foreign key(journey_id) references journey(journey_id),
 constraint status_ck check(status in('ordered','waiting_list','cancelled')),
 constraint booking_id_pk unique(booking_id)
 );
-insert into booking values(11111,12345,1611566,5,767676,SYSTIMESTAMP,'ordered',7000);
-insert into booking values(11441,13345,1611876,2,764376,SYSTIMESTAMP,'waiting_list');
-insert into booking values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
+insert into booking
+values(11111,12345,1611566,5,767676,SYSTIMESTAMP,'ordered',7000);
+insert into booking 
+values(11441,13345,1611876,2,764376,SYSTIMESTAMP,'waiting_list');
+insert into booking
+values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
 
 select*from booking ;
 
