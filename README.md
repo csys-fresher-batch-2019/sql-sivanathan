@@ -153,7 +153,7 @@ booking_seats number not null,
 ship_id number,
 date_of_booking timestamp,
 status varchar(20) not null,
-cost number,
+cost varchar2(10) not null,
 freight_name varchar2(20) ,
 fare number,
 constraint name_ca check(freight_name in('AC CONDITIONERS','BABYCYCLE','COMPUTER_TABLE','CAR')),
@@ -172,8 +172,8 @@ insert into booking
 values(11441,13345,1611876,2,764376,SYSTIMESTAMP,'waiting_list');
 insert into booking
 values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
---select b.* TOTAL_SEAT(booking_id) from booking b;
---select o.* TOTAL_FARE(booking_id) from booking o;
+select b.* TOTAL_SEAT(booking_id) from booking b;
+select o.* TOTAL_FARE(booking_id) from booking o;
 
 select*from booking ;
 select TOTAL_SEAT(1611566) from dual ;
