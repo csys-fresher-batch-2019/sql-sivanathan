@@ -147,6 +147,7 @@ date_of_booking timestamp,
 status varchar(20) not null,
 constraint sship_id_fk foreign key(ship_id) references ship(ship_id),
 constraint user_id_fa foreign key(user_id) references user_s(user_id),
+constraint abc_ck check(booking_seats>0),
 constraint journey_id_fz foreign key(journey_id) references journey(journey_id),
 constraint status_ck check(status in('ordered','waiting_list','cancelled')),
 constraint booking_id_pk unique(booking_id)
