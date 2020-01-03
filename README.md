@@ -145,6 +145,7 @@ booking_seats number not null,
 ship_id number,
 date_of_booking timestamp,
 status varchar(20) not null,
+cost,
 constraint sship_id_fk foreign key(ship_id) references ship(ship_id),
 constraint user_id_fa foreign key(user_id) references user_s(user_id),
 constraint abc_ck check(booking_seats>0),
@@ -152,9 +153,9 @@ constraint journey_id_fz foreign key(journey_id) references journey(journey_id),
 constraint status_ck check(status in('ordered','waiting_list','cancelled')),
 constraint booking_id_pk unique(booking_id)
 );
-insert into booking values(11111,12345,1611566,5,767676,SYSTIMESTAMP,'ordered');
+insert into booking values(11111,12345,1611566,5,767676,SYSTIMESTAMP,'ordered',7000);
 insert into booking values(11441,13345,1611876,2,764376,SYSTIMESTAMP,'waiting_list');
-insert into booking values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered');
+insert into booking values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
 
 select*from booking ;
 
