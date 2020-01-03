@@ -172,6 +172,8 @@ insert into booking
 values(11441,13345,1611876,2,764376,SYSTIMESTAMP,'waiting_list');
 insert into booking
 values(11131,14545,1611436,1,987676,SYSTIMESTAMP,'ordered',5000);
+--select b.* TOTAL_SEAT(booking_id) from booking b;
+--select o.* TOTAL_FARE(booking_id) from booking o;
 
 select*from booking ;
 select TOTAL_SEAT(1611566) from dual ;
