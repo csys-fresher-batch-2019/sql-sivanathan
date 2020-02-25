@@ -11,12 +11,14 @@ http://lakport.nic.in/Home.aspx
 *layout for user
 
 ### table:
-
-| user_name | user_id | date_of_birth | contact number | gender | pass |
-|-----------|---------|---------------|----------------|--------|------|
-| siva      | 12345   | 01-nov-98     | 9876543210     | M      | xyx  |
-| sumen     | 13345   | 10-dec-98     | 9876643210     | M      | aaa  |
-| bala      | 14545   | 21-jan-98     | 9870043210     | M      | lll  |
+| USER_NAME | USER_ID | DATE_OF_BIRTH | CONTACT_NUMBER | GENDER | PASS  | EMAIL                   |
+|-----------|---------|---------------|----------------|--------|-------|-------------------------|
+| siva      | 11111   | 01-11-1998    | 9999999999     | M      | eeeee | sivanatha1998@gmail.com |
+| sumen     | 22222   | 10-12-1998    | 8888888888     | M      | aaaaa | sumen@yahoo.com         |
+| bala      | 33333   | 21-01-1998    | 7777777777     | M      | lllll | bala@chainsys.com       |
+| sathish   | 44444   | 21-11-1998    | 6666666666     | M      | bbbbb | sathish@live.com        |
+| vicky     | 55555   | 21-05-1998    | 9090909090     | M      | uuuuu | vicky@chainsys.com      |
+| muthu     | 66666   | 01-05-1998    | 8080808080     | M      | muthu | muthu9825@gmail.com     |
 
 
 ``` sql
@@ -39,15 +41,20 @@ constraint unique_dd unique(contact_number,email)
 
 );
 
-insert into user_detail values('siva',11111,to_date('01-11-1998','dd-MM-yyyy'),9999999999,'M','eeeee','siva@gmail.com');
-insert into user_detail values('sumen',22222,to_date('10-12-1998','dd-MM-yyyy'),8888888888,'M','aaaaa','sumen@yahoo.com');
-insert into user_detail values('bala',33333,to_date('21-01-1998','dd-MM-yyyy'),7777777777,'M','lllll','bala@chainsys.com');
-insert into user_detail values('sathish',44444,to_date('21-11-1998','dd-MM-yyyy'),6666666666,'M','bbbbb','sathish@live.com');
-insert into user_detail values('vicky',55555,to_date('21-05-1998','dd-MM-yyyy'),9090909090,'M','uuuuu','vicky@chainsys.com');
-insert into user_detail values('thiru',66666,to_date('01-05-1998','dd-MM-yyyy'),8080808080,'M','vvvvv','thiru@live.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email)
+values('siva',11111,to_date('01-11-1998','dd-MM-yyyy'),9999999999,'M','eeeee','sivanatha1998@gmail.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email) 
+values('sumen',22222,to_date('10-12-1998','dd-MM-yyyy'),8888888888,'M','aaaaa','sumen@yahoo.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email) 
+values('bala',33333,to_date('21-01-1998','dd-MM-yyyy'),7777777777,'M','lllll','bala@chainsys.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email) 
+values('sathish',44444,to_date('21-11-1998','dd-MM-yyyy'),6666666666,'M','bbbbb','sathish@live.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email) 
+values('vicky',55555,to_date('21-05-1998','dd-MM-yyyy'),9090909090,'M','uuuuu','vicky@chainsys.com');
+insert into user_detail(user_name,user_id,date_of_birth,contact_number,gender,pass,email) 
+values('muthu',66666,to_date('01-05-1998','dd-MM-yyyy'),8080808080,'M','muthu','muthu9825@gmail.com');
 
 select*from user_detail;   --it is used the display the table content
-
 commit;
 
 
@@ -59,15 +66,14 @@ commit;
 *layout of ship schedule
 
 ### table:
-
-| user_id | ship_id | ship_type      | source_place | destination_place | total_no_of_seats | classes      |
-|---------|---------|----------------|--------------|-------------------|-------------------|--------------|
-| 12345   | 767676  | all_passengers | amindivi     | lagoons           | 100               | first_class  |
-| 13345   | 764376  | all_hr_vessels | kaavaratti   | minicoy           | 50                | owners       |
-| 14545   | 987676  | all_cargo_ship | corals       | arabiansea        | 150               | second_class |
+| SHIP_NAME | SOURCE_PLACE | TOTAL_NO_OF_SEATS | CLASSES      | AMOUNT |
+|-----------|--------------|-------------------|--------------|--------|
+| aaa ship  | amindivi     | 200               | first_class  | 5000   |
+| bbb ship  | kaavaratti   | 100               | vip          | 6000   |
+| ccc ship  | corals       | 150               | second_class | 4000   |
+| ddd ship  | amindivi     | 200               | second_class | 3000   |
 
 ~~~sql:
-
 create table ship_detail
 (
 --user_id number,
@@ -91,14 +97,17 @@ constraint ii check(source_place<>destination_place)
 
 );
 
-insert into ship_detail values(112233,'aaa ship','amindivi','lagoons',200,'first_class',5000);
-insert into ship_detail values(114455,'bbb ship','kaavaratti','minicoy',100,'vip',6000);
-insert into ship_detail values(116677,'ccc ship','corals','arabiansea',150,'second_class',4000);
-insert into ship_detail values(117788,'ddd ship','amindivi','arabiansea',200,'second_class',3000);
+insert into ship_detail(ship_id,ship_name,source_place,destination_place,total_no_of_seats,classes,amount)
+values(112233,'aaa ship','amindivi','lagoons',200,'first_class',5000);
+insert into ship_detail(ship_id,ship_name,source_place,destination_place,total_no_of_seats,classes,amount)
+values(114455,'bbb ship','kaavaratti','minicoy',100,'vip',6000);
+insert into ship_detail(ship_id,ship_name,source_place,destination_place,total_no_of_seats,classes,amount) 
+values(116677,'ccc ship','corals','arabiansea',150,'second_class',4000);
+insert into ship_detail(ship_id,ship_name,source_place,destination_place,total_no_of_seats,classes,amount) 
+values(117788,'ddd ship','amindivi','arabiansea',200,'second_class',3000);
 --insert into ship values(0909,0808,'all_passengers','amindivi','lagoons',8,'first class');
 select*from ship_detail;
-
-commit;~~~~
+commit;
 
 ### feature3;
 *journey
