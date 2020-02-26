@@ -109,16 +109,24 @@ values(117788,'ddd ship','amindivi','arabiansea',200,'second_class',3000);
 select*from ship_detail;
 commit;
 
-### feature3;
-*journey
+
+~~~~
+
+### feature2:
+
+*layout of journey schedule
 
 ### table:
-
-| journey_id | journey_date | ship_id | no_of_seats |
-|------------|--------------|---------|-------------|
-| 1611566    | 01-jan-20    | 767676  | 5           |
-| 1611876    | 02-jan-20    | 764376  | 3           |
-| 1611436    | 03-jan-20    | 987676  | 1           |
+| JOURNEY_ID | SOURCE_DATE | DESTINATION_DATE | SHIP_ID |
+|------------|-------------|------------------|---------|
+| 10202      | 01-01-20    | 02-01-20         | 112233  |
+| 10707      | 11-01-20    | 12-01-20         | 112233  |
+| 10303      | 02-01-20    | 03-01-20         | 114455  |
+| 10808      | 12-01-20    | 13-01-20         | 114455  |
+| 10404      | 03-01-20    | 04-01-20         | 116677  |
+| 10909      | 13-01-20    | 14-01-20         | 116677  |
+| 10505      | 04-01-20    | 05-01-20         | 117788  |
+| 10606      | 14-01-20    | 15-01-20         | 117788  |
 
 ~~~sql
 create table journey_detail
@@ -133,17 +141,28 @@ constraint journey_id_jj primary key(journey_id),
 constraint ship_id_kk foreign key(ship_id) references ship_detail(ship_id)
 );
 
-insert into journey_detail values(10202,to_date('01-01-2020','dd-MM-yyyy'),to_date('02-01-2020','dd-MM-yyyy'),112233);
-insert into journey_detail values(10303,to_date('02-01-2020','dd-MM-yyyy'),to_date('03-01-2020','dd-MM-yyyy'),114455);
-insert into journey_detail values(10404,to_date('03-01-2020','dd-MM-yyyy'),to_date('04-01-2020','dd-MM-yyyy'),116677);
-insert into journey_detail values(10505,to_date('04-01-2020','dd-MM-yyyy'),to_date('05-01-2020','dd-MM-yyyy'),117788);
-insert into journey_detail values(10606,to_date('05-01-2020','dd-MM-yyyy'),to_date('06-01-2020','dd-MM-yyyy'),117788);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id) 
+values(10202,to_date('01-01-2020','dd-MM-yyyy'),to_date('02-01-2020','dd-MM-yyyy'),112233);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10707,to_date('11-01-2020','dd-MM-yyyy'),to_date('12-01-2020','dd-MM-yyyy'),112233);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10303,to_date('02-01-2020','dd-MM-yyyy'),to_date('03-01-2020','dd-MM-yyyy'),114455);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10808,to_date('12-01-2020','dd-MM-yyyy'),to_date('13-01-2020','dd-MM-yyyy'),114455);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10404,to_date('03-01-2020','dd-MM-yyyy'),to_date('04-01-2020','dd-MM-yyyy'),116677);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10909,to_date('13-01-2020','dd-MM-yyyy'),to_date('14-01-2020','dd-MM-yyyy'),116677);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id) 
+values(10505,to_date('04-01-2020','dd-MM-yyyy'),to_date('05-01-2020','dd-MM-yyyy'),117788);
+insert into journey_detail(journey_id,source_date,destination_date,ship_id)
+values(10606,to_date('14-01-2020','dd-MM-yyyy'),to_date('15-01-2020','dd-MM-yyyy'),117788);
 select*from journey_detail;
 commit;
 
 ~~~~
 
-### table:
+
 
 
 ### feature4:
@@ -151,14 +170,14 @@ commit;
 
 ### table:
 
-| booking_id | user_id | journey_id | booking_seats | ship_id | date_of_booking    | status       | cost |
-|------------|---------|------------|---------------|---------|--------------------|--------------|------|
-| 11111      | 12345   | 1611566    | 5             | 767676  | 02-jan-20 06:40:36 | ordered      | 7500 |
-| 11441      | 13345   | 1611876    | 3             | 764376  | 02-jan-20 06:40:36 | waiting_list | null |
-| 11131      | 14545   | 1611436    | 1             | 987676  | 02-jan-20 06:40:36 | ordered      | 5000 |
+| BOOKING_ID | USER_ID | SHIP_ID | JOURNEY_ID | BOOKING_SEATS | DATE_OF_BOOKING | TICKET_STATUS | COST |
+|------------|---------|---------|------------|---------------|-----------------|---------------|------|
+| 100        | 11111   | 112233  | 10202      | 5             |                 | pending       | 5000 |
+| 101        | 22222   | 114455  | 10303      | 2             |                 | pending       | 6000 |
+| 102        | 33333   | 116677  | 10404      | 8             |                 | pending       | 7000 |
+| 103        | 11111   | 112233  | 10202      | 5             |                 | pending       | 5000 |
 
 ~~~sql
-
 create table booking_detail
 (
 booking_id number not null, 
@@ -178,23 +197,29 @@ constraint ccc foreign key(user_id) references user_detail(user_id),
 constraint ddd foreign key(journey_id) references journey_detail(journey_id),
 constraint eee check(booking_seats>0),
 constraint status_qq check(ticket_status in('pending','ordered','waiting_list'))
+--CONSTRAINT fk_column FOREIGN KEY(user_id) REFERENCES user_detail(user_id) ON DELETE CASCADE
 );
-drop sequence booking_id;
+
 
 create sequence booking_id start with 100 increment by 1;
 
 
-insert into booking_detail values(booking_id.nextval,11111,112233,10202,5,SYSTIMESTAMP,'pending',5000);
-insert into booking_detail values(booking_id.nextval,22222,114455,10303,2,SYSTIMESTAMP,'pending',6000);
-insert into booking_detail values(booking_id.nextval,33333,116677,10404,8,SYSTIMESTAMP,'pending',7000);
+insert into booking_detail(booking_id,user_id,ship_id,journey_id,booking_seats,date_of_booking,ticket_status,cost)
+values(booking_id.nextval,11111,112233,10202,5,SYSTIMESTAMP,'pending',5000);
+insert into booking_detail(booking_id,user_id,ship_id,journey_id,booking_seats,date_of_booking,ticket_status,cost) 
+values(booking_id.nextval,22222,114455,10303,2,SYSTIMESTAMP,'pending',6000);
+insert into booking_detail(booking_id,user_id,ship_id,journey_id,booking_seats,date_of_booking,ticket_status,cost) 
+values(booking_id.nextval,33333,116677,10404,8,SYSTIMESTAMP,'pending',7000);
+
+insert into booking_detail(booking_id,user_id,ship_id,journey_id,booking_seats,date_of_booking,ticket_status,cost)
+values(booking_id.nextval,11111,112233,10202,8,SYSTIMESTAMP,'pending',5000);
+
 
 --update booking_detail set cost=(booking_seats*(select amount from ship_detail where ship_id=767676)) where ship_id=767676 and user_id=12345; 
 --update booking_detail set cost=(booking_seats*(select amount from ship_detail where ship_id=764376)) where ship_id=764376 and user_id=13345; 
 --update booking_detail set cost=(booking_seats*(select amount from ship_detail where ship_id=987676)) where ship_id=987676 and user_id=14545; 
 
 select*from booking_detail;
-
---create sequence booking_id start with 1000 increment by 1;
 
 -------------------------------------------------------created procedure as seat_availabilitys--------------------------------
 drop procedure ticket_booking;
@@ -249,9 +274,27 @@ commit;
 ~~~~
 ### feature5:
 seat availability
-
+###TABLE:
+| SHIP_ID | JOURNEY_ID | AVAILABLE_SEATS |
+|---------|------------|-----------------|
+| 112233  | 10202      | 100             |
+| 112233  | 10707      | 200             |
+| 114455  | 10303      | 100             |
+| 114455  | 10808      | 200             |
+| 116677  | 10404      | 100             |
+| 116677  | 10909      | 200             |
+| 117788  | 10505      | 100             |
+| 117788  | 10606      | 200             |
+| 112233  | 10202      | 100             |
+| 112233  | 10707      | 200             |
+| 114455  | 10303      | 100             |
+| 114455  | 10808      | 200             |
+| 116677  | 10404      | 100             |
+| 116677  | 10909      | 200             |
+| 117788  | 10505      | 100             |
+| 117788  | 10606      | 200             |
 ~~~sql
-drop table seat_availability;
+
 create table seat_availability
 (
 
@@ -265,10 +308,44 @@ constraint tttt foreign key(journey_id) references journey_detail(journey_id)
 
 );
 
-select * from seat_availability ;
 
-insert into seat_availability values(112233,10202,100);
-insert into seat_availability values(114455,10303,100);
-insert into seat_availability values(116677,10404,100);
+
+insert into seat_availability(ship_id,journey_id,available_seat) values(112233,10202,100);
+insert into seat_availability(ship_id,journey_id,available_seat) values(112233,10707,200);
+insert into seat_availability(ship_id,journey_id,available_seat) values(114455,10303,100);
+insert into seat_availability(ship_id,journey_id,available_seat) values(114455,10808,200);
+insert into seat_availability(ship_id,journey_id,available_seat) values(116677,10404,100);
+insert into seat_availability(ship_id,journey_id,available_seat) values(116677,10909,200);
+insert into seat_availability(ship_id,journey_id,available_seat) values(117788,10505,100);
+insert into seat_availability(ship_id,journey_id,available_seat) values(117788,10606,200);
 select*from seat_availability;
 commit;
+~~~~
+###FEATURE:
+
+###TABLE:
+| ADMIN_ID | ADMIN_NAME | ADMIN_EMAIL       | PASS_WORD  |
+|----------|------------|-------------------|------------|
+| 1234     | sathish    | sathish@gmail.com | sathish123 |
+| 1235     | suresh     | suresh@gmail.com  | suresh123  |
+
+~~~SQL
+
+
+create table AdminRegister
+(
+Admin_id number ,
+Admin_name varchar(20) not null,
+Email_id varchar(30) ,
+pass_word varchar(30) not null,
+constraint admin_id_uk unique (admin_id),
+constraint Email_id_uh unique (Email_id)
+);
+
+insert into AdminRegister(Admin_id,Admin_name,Email_id,pass_word)
+values(1234,'sathish','sathish@gmail.com','sathish123');
+insert into AdminRegister(Admin_id,Admin_name,Email_id,pass_word)
+values(1235,'suresh','suresh@gmail.com','suresh123');
+select * from AdminRegister;
+commit;
+
